@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
-project(Project) # project name
+project(OvenSafetyController) # project name
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -11,18 +11,19 @@ FetchContent_Declare(
   GIT_TAG v1.14.0
 )
 FetchContent_MakeAvailable(googletest)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-
-add_library(proj_lib STATIC # src to func files
-    sources/example.cpp
+add_library(osc_lib STATIC # src to func files
+    sources/controller.cpp
 )
-target_include_directories(proj_lib PUBLIC headers) # include dirs
+target_include_directories(osc_lib PUBLIC headers) # include dirs
 
 
-add_executable(proj_tests
-    tests/test_proj.cpp
+add_executable(osc_tests
+    tests/test_osc.cpp
+    tests/mock.h
 ) # include tests
-target_link_libraries(proj_tests proj_lib gtest_main)
+target_link_libraries(osc_tests osc_lib gtest_main gmock)
 
 enable_testing()
-add_test(NAME ProjectTests COMMAND proj_tests) # adding tests
+add_test(NAME OvenSafetyControllerTests COMMAND osc_tests) # adding tests
