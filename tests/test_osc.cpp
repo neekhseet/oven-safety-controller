@@ -1,5 +1,7 @@
 #include "../includes/controller.h"
+#include "mock.h"
 #include <gtest/gtest.h>
+using ::testing::Return;
 
 TEST(ControllerTests, CanBeCreated) { Controller controller; }
 
@@ -11,7 +13,7 @@ TEST(ControllerTests, SetAndGetTargetTemperature) {
 
 TEST(ControllerTest, HeaterDisableIfTempMoreTarget) {
   MockSensor sensor;
-  EXPECT_CALL(sensor, readTemperature()).willOnce(Return(150.9));
+  EXPECT_CALL(sensor, readTemperature()).WillOnce(Return(150.9));
 
   Controller controller(sensor);
   controller.setTargetTemperature(100.0);
