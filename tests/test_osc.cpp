@@ -3,10 +3,14 @@
 #include <gtest/gtest.h>
 using ::testing::Return;
 
-TEST(ControllerTests, CanBeCreated) { Controller controller; }
+TEST(ControllerTests, CanBeCreated) {
+  MockSensor sensor;
+  Controller controller(sensor);
+}
 
 TEST(ControllerTests, SetAndGetTargetTemperature) {
-  Controller controller;
+  MockSensor sensor;
+  Controller controller(sensor);
   controller.setTargetTemperature(10);
   EXPECT_EQ(controller.getTargetTemperature(), 10);
 }
