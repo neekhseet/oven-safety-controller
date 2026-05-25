@@ -15,7 +15,7 @@ TEST(ControllerTests, SetAndGetTargetTemperature) {
   EXPECT_EQ(controller.getTargetTemperature(), 10);
 }
 
-TEST(ControllerTest, HeaterDisableIfTempMoreTarget) {
+TEST(ControllerTests, HeaterDisableIfTempMoreTarget) {
   MockSensor sensor;
   EXPECT_CALL(sensor, readTemperature()).WillOnce(Return(150.9));
 
@@ -23,4 +23,15 @@ TEST(ControllerTest, HeaterDisableIfTempMoreTarget) {
   controller.setTargetTemperature(100.0);
   controller.update();
   EXPECT_FALSE(controller.isHeaterOn());
+}
+
+TEST(ControllerTests, AlarmOnTargetTemp) {
+  MockSensor sensor;
+  EXPECT_CALL(sensor, readTemperature()).WillOnce(Return(150.9));
+
+  Controller controller(sensor);
+  controller.setTargetTemperature(100.0);
+  controller.update();
+
+  EXPECT_TRUE(controller.isAlarmOn());
 }
