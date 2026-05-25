@@ -6,6 +6,7 @@ class Controller {
   double targetTemp{0};
   const Sensor &sensor;
   bool heaterOn = false;
+  bool alarmOn = false;
 
 public:
   Controller(const Sensor &s);
@@ -15,6 +16,7 @@ public:
 
   void update();
   bool isHeaterOn() const { return heaterOn; };
+  bool isAlarmOn() const { return alarmOn; }
 };
 
 #endif
