@@ -18,7 +18,6 @@ public:
   void update();
   bool isHeaterOn() const { return heaterOn; };
   bool isAlarmOn() const { return alarmOn; }
-  void enableHeater() { alarmOn ? heaterOn : heaterOn = false; };
   void resetAlarm() { alarmOn = false; }
 };
 
