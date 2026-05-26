@@ -6,15 +6,19 @@ class Controller {
   double targetTemp{0};
   const Sensor &sensor;
   bool heaterOn = false;
+  bool alarmOn = false;
+  double maxAllowedTemp = 150.0;
 
 public:
   Controller(const Sensor &s);
 
   void setTargetTemperature(double temp) { targetTemp = temp; };
-  double getTargetTemperature() { return targetTemp; }
+  double getTargetTemperature() const { return targetTemp; }
 
   void update();
   bool isHeaterOn() const { return heaterOn; };
+  bool isAlarmOn() const { return alarmOn; }
+  void resetAlarm() { alarmOn = false; }
 };
 
 #endif
