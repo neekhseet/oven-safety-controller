@@ -66,3 +66,21 @@ TEST(ControllerTests, HeaterCanBeEnabledAfterAlarmReset) {
   controller.enableHeater();
   EXPECT_FALSE(controller.isHeaterOn());
 }
+
+TEST(ControllerTest, HeaterOnAndOffInLiveWithouAlarm) {
+  MockSensor sensor;
+
+  EXPECT_CALL(sensor, readTemperature()).WillOnce(Return(80.0));
+  Controller controller(sensor);
+  controller.setTargetTemperature(100.0);
+  controller.update();
+  EXPECT_TRUE(controller.isHeaterOn());
+
+  EXPECT_CALL(sensor, readTemperature()).WillOnce(Return(100.0));
+  controller.update();
+  EXPECT_FALSE(controller.isHeaterOn());
+
+  EXPECT_CALL(sensor, readTemperature()).WillOnce(Return(90.0));
+  controller.update();
+  EXPECT_TRUE(controller.isHeaterOn());
+}
