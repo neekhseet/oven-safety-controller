@@ -7,6 +7,7 @@ class Controller {
   const Sensor &sensor;
   bool heaterOn = false;
   bool alarmOn = false;
+  double maxAllowedTemp = 150.0;
 
 public:
   Controller(const Sensor &s);
