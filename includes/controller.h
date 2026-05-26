@@ -13,7 +13,7 @@ public:
   Controller(const Sensor &s);
 
   void setTargetTemperature(double temp) { targetTemp = temp; };
-  double getTargetTemperature() { return targetTemp; }
+  double getTargetTemperature() const { return targetTemp; }
 
   void update();
   bool isHeaterOn() const { return heaterOn; };
